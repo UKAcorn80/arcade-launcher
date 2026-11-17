@@ -459,16 +459,10 @@ function centreCarousel()
 }
 function launchGame()
 {
-
-    loading.style.display = "flex";
-
-    player.style.display = "block";
-
-    launcher.style.display = "none";
-
-    frame.src = gameUrl(gameIds[currentIndex].id);
+    window.location.href =
+        gameUrl(gameIds[currentIndex].id);
 }
-
+	
 frame.onload = () =>
 {
     setTimeout(() =>
