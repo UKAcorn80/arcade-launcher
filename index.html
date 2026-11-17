@@ -4,8 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>MakeCode Arcade Library</title>
 
+<meta name="robots" content="noindex,nofollow">
+
+<title>RJM Arcade</title>
 <style>
 
 * {
@@ -299,15 +301,7 @@ h1 {
 
 <script>
 
-const gameIds = [
-    { id: "S30010-05945-44831-21314" },
-    { id: "S50634-36220-41816-55362" },
-    { id: "S08065-73349-88435-04038" },
-    { id: "S76743-56606-62019-01297" },
-    { id: "S05143-61206-02925-05779" },
-    { id: "S38743-60476-73913-19797" },
-    { id: "S94288-86662-18702-96861" }
-];
+let gameIds = [];
 
 const carousel = document.getElementById("carousel");
 const launcher = document.getElementById("launcher");
@@ -359,6 +353,25 @@ async function getTitle(id)
     }
 }
 
+async function loadGames()
+{
+    try
+    {
+        const response =
+            await fetch("games.json");
+
+        gameIds =
+            await response.json();
+    }
+    catch(error)
+    {
+        console.error(
+            "Failed to load games.json",
+            error
+        );
+    }
+}
+	
 async function buildCarousel()
 {
     for(const game of gameIds)
@@ -530,7 +543,11 @@ document.addEventListener("touchend", e =>
 
 window.addEventListener("resize", centreCarousel);
 
-buildCarousel();
+(async () =>
+{
+    await loadGames();
+    await buildCarousel();
+})();
 
 
 </script>
