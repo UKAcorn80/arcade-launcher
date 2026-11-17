@@ -509,15 +509,25 @@ document.addEventListener("keydown", e =>
     if(player.style.display === "block")
         return;
 
-    if(e.key === "ArrowRight")
+    const key = e.key.toLowerCase();
+
+    // Navigate carousel
+    if(key === "d")
         selectGame(currentIndex + 1);
 
-    if(e.key === "ArrowLeft")
+    if(key === "a")
         selectGame(currentIndex - 1);
 
-    if(e.key === "m")
+    // Launch selected game
+    if(
+        key === "z" ||
+        key === "x" ||
+        key === "m"
+    )
+    {
         launchGame();
-});
+    }
+});;
 
 let touchStartX = 0;
 
