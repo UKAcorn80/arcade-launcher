@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Arcade Game</title>
+
+<style>
+
+html,
+body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:black;
+    font-family:Segoe UI,Arial,sans-serif;
+}
+
+#loading{
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:black;
+    color:white;
+
+    font-size:2rem;
+    font-weight:bold;
+
+    z-index:2;
+}
+
+#gameFrame{
+    width:100%;
+    height:100%;
+    border:none;
+}
+
+#fullscreenButton{
+    position:fixed;
+
+    top:10px;
+    right:10px;
+
+    width:60px;
+    height:60px;
+
+    border:none;
+    border-radius:30px;
+
+    background:rgba(0,0,0,.7);
+
+    color:white;
+    font-size:24px;
+
+    z-index:10;
+}
+
+#backButton{
+    position:fixed;
+
+    top:10px;
+    left:10px;
+
+    width:60px;
+    height:60px;
+
+    border:none;
+    border-radius:30px;
+
+    background:rgba(0,0,0,.7);
+
+    color:white;
+    font-size:24px;
+
+    z-index:10;
+}
+
+</style>
+</head>
+<body>
+
+<div id="loading">
+    Loading...
+</div>
+
+<button id="backButton">◀</button>
+
+<button id="fullscreenButton">⛶</button>
+
+<iframe id="gameFrame"></iframe>
+
+<script>
+
+const params =
+    new URLSearchParams(window.location.search);
+
+const id =
+    params.get("id");
+
+const frame =
+    document.getElementById("gameFrame");
+
+frame.src =
+    `https://arcade.makecode.com/---run?id=${id}` +
+    "&fullscreen=1" +
+    "&autofocus=1" +
+    "&nofooter=1" +
+    "&hideSimButtons=1";
+
+frame.onload = () =>
+{
+    setTimeout(() =>
+    {
+        document.getElementById("loading")
+            .style.display = "none";
+    }, 2000);
+};
+
+document
+    .getElementById("backButton")
+    .addEventListener("click", () =>
+{
+    history.back();
+});
+
+document
+    .getElementById("fullscreenButton")
+    .addEventListener("click", async () =>
+{
+    if (!document.fullscreenElement)
+    {
+        await document.documentElement.requestFullscreen();
+    }
+    else
+    {
+        await document.exitFullscreen();
+    }
+});
+
+</script>
+
+</body>
+</html>
