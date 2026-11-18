@@ -257,6 +257,7 @@ h1 {
 </style>
 </head>
 <body>
+<body tabindex="0">	
 <button id="fullscreenButton">⛶</button>
 <div id="launcher">
 
@@ -311,7 +312,14 @@ const loading = document.getElementById("loadingScreen");
 
 let currentIndex = 0;
 
+function grabFocus()
+{
+    document.body.focus();
+}
 
+window.addEventListener("load", grabFocus);
+window.addEventListener("pageshow", grabFocus);
+	
 function gameUrl(id)
 {
     const showControls =
