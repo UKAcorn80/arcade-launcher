@@ -468,10 +468,9 @@ function centreCarousel()
 function launchGame()
 {
     document.getElementById("marquee").textContent =
-        "LOADING...";
+        "STARTING GAME...";
 
-    document.getElementById("launcher").style.opacity =
-        "0.5";
+    document.body.style.cursor = "wait";
 
     setTimeout(() =>
     {
