@@ -467,8 +467,17 @@ function centreCarousel()
 }
 function launchGame()
 {
-    window.location.href =
-        `play.html?id=${gameIds[currentIndex].id}`;
+    document.getElementById("marquee").textContent =
+        "LOADING...";
+
+    document.getElementById("launcher").style.opacity =
+        "0.5";
+
+    setTimeout(() =>
+    {
+        window.location.href =
+            `play.html?id=${gameIds[currentIndex].id}`;
+    }, 100);
 }
 	
 frame.onload = () =>
